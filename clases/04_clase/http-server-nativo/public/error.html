@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error {{status}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffebee;
+        }
+        h1 {
+            color: #c62828;
+        }
+        .error-code {
+            font-size: 3em;
+            color: #c62828;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #c62828;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-code">Error {{status}}</div>
+    <h1>Algo salió mal</h1>
+    <p>{{message}}</p>
+    <a href="/" class="back-link">Volver al Inicio</a>
+</body>
+</html>
