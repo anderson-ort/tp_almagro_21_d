@@ -1,0 +1,44 @@
+[
+    {
+        "producto": "Taladro Atornillador Inalámbrico",
+        "categoria": "Herramientas Eléctricas",
+        "rango_precio_ARS": "58.860 - 86.999",
+        "nota": "Precios aproximados, pueden variar."
+    },
+    {
+        "producto": "Amoladora Angular",
+        "categoria": "Herramientas Eléctricas",
+        "rango_precio_ARS": "38.000 - 43.000",
+        "nota": "Precios aproximados, pueden variar."
+    },
+    {
+        "producto": "Rotomartillo",
+        "categoria": "Herramientas Eléctricas",
+        "rango_precio_ARS": "desde 66.000",
+        "nota": "Precios aproximados, pueden variar."
+    },
+    {
+        "producto": "Prensa Carpintero para escuadrar",
+        "categoria": "Herramientas Manuales",
+        "rango_precio_ARS": "desde 22.988",
+        "nota": "Precios aproximados, pueden variar."
+    },
+    {
+        "producto": "Set de 6 Destornilladores",
+        "categoria": "Herramientas Manuales",
+        "rango_precio_ARS": "desde 16.431",
+        "nota": "Precios aproximados, pueden variar."
+    },
+    {
+        "producto": "Pintura Látex (20 litros)",
+        "categoria": "Materiales",
+        "rango_precio_ARS": "desde 58.000",
+        "nota": "Precios aproximados, pueden variar."
+    },
+    {
+        "producto": "Escalera de aluminio (3 escalones)",
+        "categoria": "Materiales",
+        "rango_precio_ARS": "desde 39.000",
+        "nota": "Precios aproximados, pueden variar."
+    }
+]
