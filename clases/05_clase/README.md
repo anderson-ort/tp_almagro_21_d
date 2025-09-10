@@ -16,6 +16,9 @@ Una **API (Application Programming Interface)** es un conjunto de reglas y proto
 
 ---
 
+### [Explicacion de lo que es una REST API](./RestApi.md)
+
+
 ## Tipos de APIs con Ejemplos en JavaScript (Node.js + Express)
 
 ### 1. APIs Públicas
