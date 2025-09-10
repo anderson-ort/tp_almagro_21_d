@@ -162,6 +162,8 @@ Arquitectura donde cada componente es independiente y se comunica mediante APIs.
 
 ## Arquitectura en Capas (Layered Architecture) para Node.js
 
+![Node JS Layered Arquitecture](assets/layered-arquitecture.png)
+
 La arquitectura en capas es un patrón de diseño que organiza el código en niveles con responsabilidades específicas, facilitando el mantenimiento, testing y escalabilidad.
 
 ### Capas típicas en una aplicación Node.js:
