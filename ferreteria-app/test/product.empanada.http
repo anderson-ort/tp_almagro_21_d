@@ -1,0 +1,5 @@
+@host=http://127.0.0.1:3001
+
+### Peticiond del tipo GET
+GET {{host}}/api/producto/empanada/2
+
