@@ -3,3 +3,23 @@
 ### Peticiond del tipo GET
 GET {{host}}/api/producto/empanada/2
 
+
+### Peticiond del tipo GET pero por medio de un json --> esto va a fallar por que no existe
+GET {{host}}/api/producto/empanada
+Content-Type: application/json
+
+{
+    "id": "123"
+}
+
+
+### Peticiond del tipo GET pero por medio de un json --> esto va a fallar por que no existe
+POST {{host}}/api/producto
+Content-Type: application/json
+
+{
+    "name": "tuerca",
+    "descripcion": "cosito para enroscar",
+    "cantidad":20,
+    "tags": ["gris","rosca","barato"]
+}

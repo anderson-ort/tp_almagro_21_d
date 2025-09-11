@@ -6,7 +6,7 @@ export class DataBaseRepository {
   }
 
   async getAllData() {
-    const data = await fs.readFile(this.path, (encoding = 'utf8'));
+    const data = await fs.readFile(this.path, {encoding: 'utf8'});
     return await JSON.parse(data);
   }
 
@@ -16,5 +16,17 @@ export class DataBaseRepository {
     const filteredData = data.filter((product) => product.id === idParam);
     if (!filteredData) throw Error('No existe este producto');
     return filteredData;
+  }
+
+  async createProduct(product) {
+    let data = await this.getAllData();
+
+    data.push(product);
+
+    await fs.writeFile(this.path, JSON.stringify(data, null, 2));
+
+    return {
+      idProduct: product.id,
+    };
   }
 }

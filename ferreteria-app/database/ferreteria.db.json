@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "7b777325",
+    "nombre": "tuerca",
+    "descripcion": "cosito para enroscar",
+    "cantidad": 20,
+    "tags": [
+      "gris",
+      "rosca",
+      "barato"
+    ]
+  }
+]
