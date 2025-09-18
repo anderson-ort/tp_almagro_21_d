@@ -1,6 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
-import { ProductController } from './controllers/product.controller.js';
+import productRouter from './routers/product.router.js';
+import productAdminRouter from './routers/product-admin.router.js';
+import jwtRouter from './routers/admin.router.js';
 
 const morgarnModule = morgan(':method :url :status :res[content-length] - :response-time ms');
 
@@ -10,9 +12,11 @@ const server = express();
 server.use(express.json());
 // middleware --> lo que hace es logging de las peticiones al server
 server.use(morgarnModule);
-
-server.post('/api/producto', ProductController.createProduct);
-server.get('/api/producto/empanada', ProductController.getByIdBody);
-server.get('/api/producto/empanada/:id', ProductController.getById);
+// middleware de routing de products
+server.use(productRouter);
+// middleware de routing solo admin
+server.use(productAdminRouter);
+// middleraware para login
+server.use(jwtRouter)
 
 export default server;

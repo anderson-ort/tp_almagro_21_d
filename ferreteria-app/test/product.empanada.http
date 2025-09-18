@@ -1,15 +1,51 @@
 @host=http://127.0.0.1:3001
+@idProducto=4c3d1107
+@apikey=empanada-secret
 
-### Peticiond del tipo GET
-GET {{host}}/api/producto/empanada/2
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkJydWNlV2F5bmUiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTgxNjEwNDQsImV4cCI6MTc1ODI0NzQ0NH0.HsCAvjUwSqs1sh6_Ej1AIwOLysod_1_ch4XurBpIZAw
 
-
-### Peticiond del tipo GET pero por medio de un json --> esto va a fallar por que no existe
-GET {{host}}/api/producto/empanada
+### Traer todos los productos siendo admin
+GET {{host}}/api/admin/products
 Content-Type: application/json
 
 {
-    "id": "123"
+    "validacion": "empanada"
+}
+
+
+
+### Traer todos los productos con apikey
+GET {{host}}/api/apikey/products?api_key={{apikey}}
+
+### Obtener productos con API Key en header
+GET {{host}}/api/apikey/products
+x-api-key: {{apikey}}
+
+
+
+### LOGIN PARA OBTENER EL JWT
+POST {{host}}/user/login
+Content-Type: application/json
+
+{
+    "username": "BruceWayne",
+    "password": "soyBatman"
+}
+
+
+### Obtener productos (con token JWT)
+GET {{host}}/api/jwtoken/products
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+
+
+### Peticiond del tipo GET
+GET {{host}}/api/producto
+Content-Type: application/json
+
+{
+    "id": "{{idProducto}}"
 }
 
 
@@ -18,8 +54,23 @@ POST {{host}}/api/producto
 Content-Type: application/json
 
 {
+    "id": "{{idProducto}}" ,
     "name": "tuerca",
     "descripcion": "cosito para enroscar",
     "cantidad":20,
     "tags": ["gris","rosca","barato"]
 }
+
+
+### Peticion para probar que se puede borrar un producto
+DELETE {{host}}/api/producto/{{idProducto}}
+
+### Peticion para actualizar un producto
+PATCH {{host}}/api/producto/{{idProducto}}
+Content-Type: application/json
+
+{
+    "descripcion": "Cambio de descripcion",
+    "cantidad": 10
+}
+
