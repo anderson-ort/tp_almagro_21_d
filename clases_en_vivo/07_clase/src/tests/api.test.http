@@ -1,0 +1,41 @@
+@Host=http://127.0.0.1
+@Port=3001
+@EndpointTempalte = api/book
+
+@mongoId=68f9854ee8539580dad010d6
+
+
+###  Validacion de seleccion all
+GET  {{Host}}:{{Port}}/{{EndpointTempalte}}/all
+
+###  Validacion de seleccion
+GET  {{Host}}:{{Port}}/{{EndpointTempalte}}/select/{{mongoId}}
+
+
+###  Validacion de borrado
+DELETE  {{Host}}:{{Port}}/{{EndpointTempalte}}/delete/9
+
+
+###  Creacion de Libro
+POST  {{Host}}:{{Port}}/{{EndpointTempalte}}/create
+Content-Type: application/json
+
+{
+    "category":"Fantasia",
+    "name": "Elije tu propia Aventura"
+}
+
+
+###  Creacion de Libro
+PATCH   {{Host}}:{{Port}}/{{EndpointTempalte}}/update
+Content-Type: application/json
+
+{
+    
+    "category":"Guerra",
+    "name": "Decile que no a tu sra.",
+    "id": 12
+
+}
+
+

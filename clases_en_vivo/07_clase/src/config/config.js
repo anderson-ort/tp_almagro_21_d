@@ -9,6 +9,8 @@ const {
     MYSQL_PWD,
     MYSQL_HOST,
     MYSQL_PORT,
+    MONGO_URI,
+    
     DIALECT,
     SERVER_PORT,
     SERVER_HOST
@@ -21,6 +23,7 @@ export const config ={
     MYSQL_PWD,
     MYSQL_HOST,
     MYSQL_PORT,
+    MONGO_URI,
     DIALECT,
     SERVER_PORT,
     SERVER_HOST
