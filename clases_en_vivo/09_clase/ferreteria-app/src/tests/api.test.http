@@ -1,0 +1,43 @@
+@Host = http://127.0.0.1
+@Port = 3001
+@Endpoint = api/products
+
+@productId = 68f9854ee8539580dad010d6
+
+
+### 🟢 Obtener todos los productos
+GET {{Host}}:{{Port}}/api/all_products
+Content-Type: application/json
+
+
+### 🟡 Obtener un producto por ID
+GET {{Host}}:{{Port}}/{{Endpoint}}/select/{{productId}}
+Content-Type: application/json
+
+
+### 🔴 Eliminar un producto por ID
+DELETE {{Host}}:{{Port}}/{{Endpoint}}/delete/{{productId}}
+Content-Type: application/json
+
+
+### 🟢 Crear un nuevo producto
+POST {{Host}}:{{Port}}/{{Endpoint}}/create
+Content-Type: application/json
+
+{ "id":100,
+    "nombre": "Auriculares Gamer",
+    "precio": 45000,
+    "descripcion": "Auriculares con micrófono RGB y cancelación de ruido"
+}
+
+
+### 🟡 Actualizar un producto existente
+PATCH {{Host}}:{{Port}}/{{Endpoint}}/update
+Content-Type: application/json
+
+{
+    "id": "{{productId}}",
+    "nombre": "Auriculares Gamer PRO",
+    "precio": 52000,
+    "descripcion": "Versión mejorada con sonido envolvente 7.1"
+}
