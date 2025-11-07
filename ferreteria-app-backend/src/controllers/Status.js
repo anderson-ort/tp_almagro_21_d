@@ -1,9 +1,7 @@
-
-
-export default AppStatus = {
+const AppStatus = {
 
     welcome:
-        (req, res) => {
+        async (req, res) => {
             res.json({
                 service: "Ferretería Smart API",
                 version: "1.0.0",
@@ -25,7 +23,7 @@ export default AppStatus = {
 
         },
     healtCheck:
-        (req, res) => {
+        async (req, res) => {
             const isMongoConnected = mongoose.connection.readyState === 1;
 
             res.status(isMongoConnected ? 200 : 503).json({
@@ -37,4 +35,6 @@ export default AppStatus = {
             });
 
         }
-    }
+}
+
+export default AppStatus

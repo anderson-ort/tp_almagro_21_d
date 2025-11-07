@@ -1,28 +1,22 @@
 import express from "express"
 import ProductAllRouter from "./router/product.all.router.js"
 import ProductRouter from "./router/producto.router.js"
+import notFoundHandler from "./middleware/notFoundHandler.js"
 
 const server = express()
 server.use(express.json())
 
 
-server.get("/", (req, res) => {
+server.use("/", WelcomePacRouter)
 
-    res.json({
-        message: "Bienvenidos a la api de ferreteria",
-        status: "OK"
-    })
+// user authentication by JWT
 
-})
+// not protected
+server.use("/api/v1/products", ProductAllRouter)
+// protected
+server.use("/api/v1/product", ProductRouter)
 
-
-server.use("/api/all_products", ProductAllRouter)
-
-server.use("/api/products", ProductRouter)
-
-server.use((req, res, next) => {
-    res.status(404).send('No esta disponible este endpoint' + req.url);
-});
-
+// not found
+server.use(notFoundHandler)
 
 export default server
