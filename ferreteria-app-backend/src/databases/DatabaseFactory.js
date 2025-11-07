@@ -6,7 +6,7 @@ import SupaBaseConnection from "./supabase.cnx.js";
 
 export default class DatabaseFactory {
 
-    static async connectMongo(cnx){
+    static async connectMongo(cnx) {
         await cnx.connect()
     }
 
@@ -17,7 +17,7 @@ export default class DatabaseFactory {
                 const mongo = new MongooseConnection();
                 DatabaseFactory.connectMongo(mongo)
 
-            case 'supabase':            
+            case 'supabase':
                 return SupaBaseConnection.connect();
 
             default:
@@ -29,4 +29,7 @@ export default class DatabaseFactory {
         const databaseType = config.DATABASE ?? 'mongoose';
         return DatabaseFactory.createConnection(databaseType);
     }
+
+    
 }
+
