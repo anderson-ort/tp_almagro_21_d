@@ -9,4 +9,4 @@ WelcomeRouter
     .get("/", AppStatus.welcome)
     .get("/healthCheck", AppStatus.healtCheck)
 
-export default Router
+export default WelcomeRouter

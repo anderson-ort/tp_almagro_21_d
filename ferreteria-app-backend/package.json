@@ -28,11 +28,14 @@
     "format": "npx biome format --write src/ index.js"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.77.0",
+    "@supabase/supabase-js": "^2.81.1",
     "biome": "^0.3.3",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "mongoose": "^8.19.2",
     "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "jsonwebtoken": "^9.0.2"
   }
 }
