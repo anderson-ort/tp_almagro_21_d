@@ -1,16 +1,16 @@
+import DatabaseFactory from "../databases/DatabaseFactory.js";
+
 const AppStatus = {
 
     welcome:
         async (req, res) => {
             res.json({
-                service: "Ferretería Smart API",
+                service: "Ferreteria-App  API",
                 version: "1.0.0",
                 status: "operational",
-                description: "Sistema de gestión inteligente de productos de ferretería con capacidades de búsqueda semántica",
+                description: "Sistema de gestión inteligente de productos",
                 capabilities: {
                     database: "Multi-database architecture (Supabase + MongoDB)",
-                    search: "Context-based similarity search",
-                    automation: "Automatic embedding generation",
                     documentation: "Interactive API documentation"
                 },
                 links: {
@@ -24,7 +24,10 @@ const AppStatus = {
         },
     healtCheck:
         async (req, res) => {
-            const isMongoConnected = mongoose.connection.readyState === 1;
+
+            const mongoose = DatabaseFactory.getConnection()
+
+            const isMongoConnected = await mongoose?.readyState === 1;
 
             res.status(isMongoConnected ? 200 : 503).json({
                 status: isMongoConnected ? 'healthy' : 'degraded',

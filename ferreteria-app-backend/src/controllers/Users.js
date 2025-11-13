@@ -10,7 +10,7 @@ export const ApiUserController = {
         const { email, password } = request.body;
 
         if (!email || !password)
-            return res.status(400).json({ message: "Email and password required" });
+            return response.status(400).json({ message: "Email and password required" });
 
         try {
 
@@ -27,15 +27,17 @@ export const ApiUserController = {
             const token = data.session?.access_token;
 
             return response.status(201).json({
-                message: "El usuario para Ferreteria-App",
-                user: data.user,
+                message: `El usuario ${data.user.email} se ha dado de alta en: Ferreteria-App`,
+                user: data.user.email,
                 token,
             });
+
         } catch (err) {
             console.error("Signup error:", err);
             return response.status(500).json({ message: "Internal server error" });
         }
     },
+
     login: async (request, response) => {
 
         const { email, password } = request.body;

@@ -28,14 +28,17 @@
     "format": "npx biome format --write src/ index.js"
   },
   "dependencies": {
+    "@scalar/express-api-reference": "^0.8.24",
     "@supabase/supabase-js": "^2.81.1",
-    "biome": "^0.3.3",
+    "biome": "^0.2.2",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "mongoose": "^8.19.2",
-    "morgan": "^1.10.1"
+    "express-rate-limit": "^8.2.1",
+    "mongoose": "^8.19.2"
   },
   "devDependencies": {
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1"
   }
 }

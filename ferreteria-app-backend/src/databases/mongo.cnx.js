@@ -19,7 +19,7 @@ class MongooseConnection {
             return this.connection;
         } catch (err) {
             console.error('Error connecting to Mongoose:', err);
-            throw err;
+            return this.connection
         }
     }
 }

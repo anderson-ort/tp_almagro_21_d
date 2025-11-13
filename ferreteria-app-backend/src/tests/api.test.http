@@ -1,7 +1,7 @@
 @host = http://localhost:3001
 @contentType = application/json
 
-@useremail = "sample-user@example.com"
+@useremail = "juli-v@example.com"
 @userpwd = "securepassword123"
 
 ### Signup (Create a new user)

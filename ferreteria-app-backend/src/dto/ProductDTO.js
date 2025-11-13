@@ -5,7 +5,6 @@ export default class ProductDto {
             id: product?.id ?? product._id,
             nombre: product.nombre.toUpperCase(),
             precio: `$ ${product.precio} ARGS`
-
         }
     }
 

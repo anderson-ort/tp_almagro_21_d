@@ -1,0 +1,446 @@
+openapi: 3.1.0
+
+info:
+  title: Ferreteria Smart API
+  description: Sistema de gestión de productos para ferreterías.
+  version: 1.0.0
+
+# servers:
+#   - url: http://localhost:3001
+#     description: Entorno local
+
+paths:
+  /:
+    get:
+      tags:
+        - Status
+      summary: Bienvenida
+      operationId: welcome
+      responses:
+        '200':
+          description: Información del servicio
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WelcomeResponse'
+
+  /healthCheck:
+    get:
+      tags:
+        - Status
+      summary: Health check
+      operationId: healthCheck
+      responses:
+        '200':
+          $ref: '#/components/responses/Healthy'
+        '503':
+          $ref: '#/components/responses/Degraded'
+
+  # 🔐 NOTA: Esta ruta está protegida en tu código actual (authenticateToken presente)
+  /api/v1/products:
+    get:
+      tags:
+        - Productos
+      summary: Listar todos los productos (requiere autenticación)
+      security:
+        - bearerAuth: []
+      operationId: getAllProducts
+      responses:
+        '200':
+          description: Lista de productos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "OK"
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/product/select/{id}:
+    get:
+      tags:
+        - Productos
+      summary: Obtener producto por ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "672a1b2c3d4e5f6a7b8c9d0e"
+      responses:
+        '200':
+          description: Producto encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "OK"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+        '404':
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Producto no encontrado"
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/product/delete/{id}:
+    delete:
+      tags:
+        - Productos
+      summary: Eliminar producto por ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "672a1b2c3d4e5f6a7b8c9d0e"
+      responses:
+        '200':
+          description: Producto eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Producto eliminado correctamente"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/product/create:
+    post:
+      tags:
+        - Productos
+      summary: Crear nuevo producto
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - precio
+              properties:
+                nombre:
+                  type: string
+                  example: "Taladro inalámbrico"
+                precio:
+                  type: number
+                  format: float
+                  example: 149.99
+                descripcion:
+                  type: string
+                  example: "Taladro de 20V con batería de litio y 2 velocidades."
+      responses:
+        '201':
+          description: Producto creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Producto creado correctamente"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+        '400':
+          description: Campos faltantes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Faltan campos requeridos"
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/product/update:
+    patch:
+      tags:
+        - Productos
+      summary: Actualizar producto (por body con ID)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  example: "672a1b2c3d4e5f6a7b8c9d0e"
+                nombre:
+                  type: string
+                  example: "Taladro mejorado"
+                precio:
+                  type: number
+                  format: float
+                  example: 169.99
+                descripcion:
+                  type: string
+                  example: "Modelo 2025 con mayor torque y batería de larga duración."
+      responses:
+        '200':
+          description: Producto actualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Producto actualizado correctamente"
+                  payload:
+                    $ref: '#/components/schemas/Product'
+        '400':
+          description: ID faltante
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "El ID del producto es obligatorio"
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/user/signup:
+    post:
+      tags:
+        - Autenticación
+      summary: Registro de usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '201':
+          description: Usuario creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      email:
+                        type: string
+                  token:
+                    type: string
+                    nullable: true
+        '400':
+          description: Error en registro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/user/login:
+    post:
+      tags:
+        - Autenticación
+      summary: Iniciar sesión
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Autenticación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user:
+                    type: string
+                  role:
+                    type: string
+                  token:
+                    type: string
+        '401':
+          description: Credenciales inválidas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    WelcomeResponse:
+      type: object
+      properties:
+        service:
+          type: string
+        version:
+          type: string
+        status:
+          type: string
+        description:
+          type: string
+        capabilities:
+          type: object
+          properties:
+            database:
+              type: string
+            documentation:
+              type: string
+        links:
+          type: object
+          properties:
+            docs:
+              type: string
+              format: uri
+            health:
+              type: string
+              format: uri
+            repository:
+              type: string
+              format: uri
+        timestamp:
+          type: string
+          format: date-time
+
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+        nombre:
+          type: string
+        precio:
+          type: number
+          format: float
+        descripcion:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - nombre
+        - precio
+
+  responses:
+    Healthy:
+      description: Sistema saludable
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                enum: [healthy]
+              databases:
+                type: object
+
+    Degraded:
+      description: Sistema degradado
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                enum: [degraded]
+              databases:
+                type: object
+
+    InternalServerError:
+      description: Error interno del servidor
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Error interno del servidor"
